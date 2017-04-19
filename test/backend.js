@@ -3,11 +3,10 @@ import supertest from 'supertest'
 
 const request = supertest.agent(app.listen())
 
-describe('Hello World', function () {
-  it('should say "Hello World"', function (done) {
+describe('Server started', function () {
+  it('should return HTTP 200', function (done) {
     request
       .get('/')
-      .expect(200)
-      .expect('Hello World', done)
+      .expect(200, done)
   })
 })
