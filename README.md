@@ -7,6 +7,13 @@ npm install
 npm run build
 ```
 
+### database
+```
+npm run migrate:up
+npm run migrate:down
+```
+
+
 ### test server
 
 ```
