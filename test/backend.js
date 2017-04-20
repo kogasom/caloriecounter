@@ -66,7 +66,6 @@ describe('Registration', function () {
             if (!res.body.user) throw new Error('no response.user')
             if (res.body.user.name != user.name) throw new Error('wrong user.name')
             if (res.body.user.username != user.username) throw new Error('wrong user.username')
-            if (res.body.user.password != user.password) throw new Error('wrong user.password')
         })
         .end(done)
     })
@@ -105,6 +104,7 @@ describe('Login', function () {
     it('should not log in with wrong credentials', function (done) {
         request
         .post('/auth/login')
+        .expect(401)
         .send({
             username: user.username,
             password: randomString(10)

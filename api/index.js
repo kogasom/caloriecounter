@@ -15,16 +15,35 @@ router.post('/auth/register', function (ctx, next) {
 
     if (validator.hasErrors) {
         ctx.body = {errors: validator.errors}
-    } else {
-        ctx.body = {user: user.create(ctx.request.body)}
+        return
     }
+
+    ctx.body = {user: user.create(ctx.request.body)}
 });
 
 router.post('/auth/login', function (ctx, next) {
     var validator = validate(ctx.request.body,['username','password'])
 
-    if (validator.hasErrors) ctx.body = {errors: validator.errors}
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+        return
+    }
+
+    let usr = user.findByCredentials(ctx.request.body)
+    if (!usr) {
+        ctx.status = 401
+        ctx.body = {
+            errors: {
+                auth: "Wrong credentials"
+            }
+        }
+        return;
+    }
+
+    ctx.body = {user: usr}
 });
+
+
 
 app.use(serve('build'));
 
