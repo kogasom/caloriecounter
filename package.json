@@ -26,6 +26,8 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "dev": "node api/start.js",
-    "test:backend": "mocha --compilers js:babel-register"
+    "test:backend": "mocha --compilers js:babel-register",
+    "migrate:up": "node api/database/migrations up",
+    "migrate:down": "node api/database/migrations down"
   }
 }
