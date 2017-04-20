@@ -43,11 +43,30 @@ router.post('/auth/login', function (ctx, next) {
     ctx.body = {user: usr}
 });
 
-app.use(async function (ctx, next) {
-    var authHeader = ctx.request.get('Authorization')
-    if (!authHeader) return
+router.post('/user', function (ctx, next) {
+    try {
+        ctx.assert(ctx.state.user, 401, 'Unauthenticated')
+    } catch (err) {
+        return
+    }
 
-    ctx.state.user = await user.findByToken(authHeader.split(" ")[1])
+    var validator = validate(ctx.request.body,['daily_calories'])
+
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+        return
+    }
+
+    var result = user.update(ctx.state.user.id, ctx.request.body)
+
+    if (result) ctx.body = {user: result}
+});
+
+
+app.use(function (ctx, next) {
+    var authHeader = ctx.request.get('Authorization')
+    if (authHeader) ctx.state.user = user.findByToken(authHeader.split(" ")[1])
+    next()
 })
 
 app.use(serve('build'));

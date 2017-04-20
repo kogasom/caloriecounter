@@ -18,7 +18,7 @@ function create ({name, username, password}) {
 }
 
 function find (id) {
-    return db.prepare('select * from users where id = ?').get(id)
+    return db.prepare('select name,username,api_token,daily_calories from users where id = ?').get(id)
 }
 
 function findByCredentials ({username, password}) {
@@ -35,7 +35,7 @@ function findByCredentials ({username, password}) {
 
 function findByToken(token) {
     try {
-        var result = db.prepare('select name,username,api_token,daily_calories from users where api_token = ?')
+        var result = db.prepare('select id,name,username,api_token,daily_calories from users where api_token = ?')
         .get(token)
     } catch (e) {
         console.error(e.message)
@@ -45,9 +45,22 @@ function findByToken(token) {
     return result
 }
 
+function update(id, {daily_calories}) {
+    try {
+        var result = db.prepare('update users set daily_calories = ? where id = ?')
+        .run(daily_calories,id)
+    } catch (e) {
+        console.error(e.message)
+        return false
+    }
+
+    return find(id)
+}
+
 export default {
     create,
     find,
     findByCredentials,
-    findByToken
+    findByToken,
+    update
 }
