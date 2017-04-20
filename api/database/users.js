@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3'
 import randomString from 'crypto-random-string'
 import md5 from 'md5'
+import Meals from './meals.js'
 
 var db = new Database('./api/database/caloriecounter.db')
 
