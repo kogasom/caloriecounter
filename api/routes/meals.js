@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import Meal from '../database/meals.js'
+import validate from '../validator.js'
 
 const router = new Router();
 
@@ -15,28 +16,55 @@ router.use('/meals',function (ctx, next) {
 
     next()
 });
+
 router.get('/meals',function (ctx, next) {
     ctx.body = {
         meals: ctx.state.meal.all()
     }
-    next()
 });
+
 router.get('/meals/:id',function (ctx, next) {
-    console.log('GET meal '+ctx.params.id)
     ctx.body = {
         meals: ctx.state.meal.find(ctx.params.id)
     }
-    return
+});
 
-});
 router.post('/meals',function (ctx, next) {
-    console.log('POST meal')
+    var validator = validate(ctx.request.body,['date','time','text','calories'])
+
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+        return
+    }
+
+    ctx.body = {
+        meals: ctx.state.meal.create(ctx.request.body)
+    }
 });
-router.put('/meals/:id',function (ctx, next) {
-    console.log('UPDATE meal')
+router.put('/meals',function (ctx, next) {
+    var validator = validate(ctx.request.body,['id','date','time','text','calories'])
+
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+        return
+    }
+
+    ctx.body = {
+        meals: ctx.state.meal.update(ctx.request.body)
+    }
 });
 router.delete('/meals/:id',function (ctx, next) {
-    console.log('DELETE meal '+ctx.params.id)
+    var validator = validate(ctx.request.body,['id'])
+
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+        return
+    }
+
+    ctx.body = {
+        meals: {id: ctx.params.id},
+        deleted: ctx.state.meal.remove(ctx.params.id)
+    }
 });
 
 export default router

@@ -15,7 +15,7 @@ class Meals {
             return false
         }
 
-        if (result.changes == 1) return find(result.lastInsertROWID)
+        if (result.changes == 1) return this.find(result.lastInsertROWID)
     }
 
     all() {
@@ -36,12 +36,12 @@ class Meals {
             return false
         }
 
-        find(meal.id)
+        return this.find(meal.id)
     }
 
     remove(id) {
         try {
-            this.db.prepare('delete from meals where where user_id=? and id=?')
+            this.db.prepare('delete from meals where user_id=? and id=?')
             .run(this.user_id,id)
         } catch (e) {
             console.error(e.message)
