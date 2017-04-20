@@ -23,8 +23,20 @@ function find (id) {
 
 function findByCredentials ({username, password}) {
     try {
-        var result = db.prepare('select * from users where username = ? and password = ?')
+        var result = db.prepare('select name,username,api_token,daily_calories from users where username = ? and password = ?')
         .get(username,md5(password))
+    } catch (e) {
+        console.error(e.message)
+        return false
+    }
+
+    return result
+}
+
+function findByToken(token) {
+    try {
+        var result = db.prepare('select name,username,api_token,daily_calories from users where api_token = ?')
+        .get(token)
     } catch (e) {
         console.error(e.message)
         return false
@@ -36,5 +48,6 @@ function findByCredentials ({username, password}) {
 export default {
     create,
     find,
-    findByCredentials
+    findByCredentials,
+    findByToken
 }

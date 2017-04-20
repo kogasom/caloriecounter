@@ -43,7 +43,12 @@ router.post('/auth/login', function (ctx, next) {
     ctx.body = {user: usr}
 });
 
+app.use(async function (ctx, next) {
+    var authHeader = ctx.request.get('Authorization')
+    if (!authHeader) return
 
+    ctx.state.user = await user.findByToken(authHeader.split(" ")[1])
+})
 
 app.use(serve('build'));
 
