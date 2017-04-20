@@ -15,6 +15,12 @@ router.post('/auth/register', function (ctx, next) {
     if (validator.hasErrors) ctx.body = {errors: validator.errors}
 });
 
+router.post('/auth/login', function (ctx, next) {
+    var validator = validate(ctx.request.body,['username','password'])
+
+    if (validator.hasErrors) ctx.body = {errors: validator.errors}
+});
+
 app.use(serve('build'));
 
 app.use(router.routes());
