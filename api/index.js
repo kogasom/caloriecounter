@@ -62,6 +62,22 @@ router.post('/user', function (ctx, next) {
     if (result) ctx.body = {user: result}
 });
 
+router.get('/meals',function (ctx, next) {
+    console.log('GET meals')
+});
+router.get('/meals/:id',function (ctx, next) {
+    console.log('GET meal '+this.params.id)
+});
+router.post('/meals',function (ctx, next) {
+    console.log('POST meal')
+});
+router.put('/meals',function (ctx, next) {
+    console.log('UPDATE meal')
+});
+router.delete('/meals/:id',function (ctx, next) {
+    console.log('DELETE meal '+this.params.id)
+});
+
 
 app.use(function (ctx, next) {
     var authHeader = ctx.request.get('Authorization')
