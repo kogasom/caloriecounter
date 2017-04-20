@@ -3,6 +3,7 @@ import serve from 'koa-static'
 import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
 import validate from './validator.js'
+import user from './database/users.js'
 
 const router = new Router();
 const app = new Koa();
@@ -12,7 +13,11 @@ app.use(bodyParser());
 router.post('/auth/register', function (ctx, next) {
     var validator = validate(ctx.request.body,['name','username','password'])
 
-    if (validator.hasErrors) ctx.body = {errors: validator.errors}
+    if (validator.hasErrors) {
+        ctx.body = {errors: validator.errors}
+    } else {
+        ctx.body = {user: user.create(ctx.request.body)}
+    }
 });
 
 router.post('/auth/login', function (ctx, next) {
