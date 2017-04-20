@@ -10,7 +10,7 @@ const app = new Koa();
 app.use(bodyParser());
 
 router.post('/auth/register', function (ctx, next) {
-    var validator = validate(ctx.request.body,['username','password'])
+    var validator = validate(ctx.request.body,['name','username','password'])
 
     if (validator.hasErrors) ctx.body = {errors: validator.errors}
 });

@@ -12,11 +12,21 @@ describe('Server started', function () {
 })
 
 describe('Registration', function () {
-    it('should return {errors} when username or password is missing', function (done) {
+    it('should return response.errors when required fields are missing', function (done) {
         request
         .post('/auth/register')
         .expect(function(res){
             if (!res.body.errors) throw new Error('no {errors} in response')
+        })
+        .end(done)
+    })
+
+    it('should return errors.name when name is missing', function (done) {
+        request
+        .post('/auth/register')
+        .expect(function(res){
+            if (!res.body.errors) throw new Error('no {errors} in response')
+            if (!res.body.errors.name) throw new Error('no errors.name in response')
         })
         .end(done)
     })
