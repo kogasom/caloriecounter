@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { storeMeal } from '../actions'
 
 class CreateMeal extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             date: '',
             time: '',
@@ -16,6 +19,12 @@ class CreateMeal extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        const { dispatch } = this.props
+        dispatch(storeMeal(this.state))
+    }
+
     render () {
         return (
             <div className="panel panel-default">
@@ -23,7 +32,7 @@ class CreateMeal extends Component {
                     Meal
                 </div>
                 <div className="panel-body">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label>Date</label>
                             <input type="text" value={this.state.date} name="date" onChange={this.handleChange} className="form-control" />
@@ -51,4 +60,4 @@ class CreateMeal extends Component {
     }
 }
 
-export default CreateMeal
+export default connect()(CreateMeal)

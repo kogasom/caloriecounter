@@ -14,9 +14,18 @@ const user = (state = '', action) => {
     }
 }
 
+
+const meals = (state = [], action) => {
+    switch(action.type) {
+        case 'ADD_MEAL': return [...state,action.meal]
+        default: return state
+    }
+}
+
 const reducer = combineReducers({
     token,
-    user
+    user,
+    meals
 })
 
 export default reducer

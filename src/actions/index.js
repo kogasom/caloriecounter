@@ -32,9 +32,19 @@ export const loginRequest = user => dispatch => {(
     })
 )}
 
-
-
 export const logout = () => dispatch => {
     dispatch(setToken(''))
     dispatch(setUser(''))
 }
+
+export const addMeal = meal => ({
+    type: 'ADD_MEAL',
+    meal
+})
+
+export const storeMeal = meal => (dispatch,getState) => {(
+    axios.post('http://localhost:3000/meals',meal,{headers: {'Authorization': 'Bearer '+getState().token}})
+    .then(response => {
+        dispatch(addMeal(response.data.meals))
+    })
+)}

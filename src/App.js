@@ -6,8 +6,8 @@ import Login from './components/Login.js'
 import Registration from './components/Registration.js'
 import Settings from './components/Settings.js'
 import CreateMeal from './components/CreateMeal.js'
-import Filter from './components/Filter.js'
 import Nav from './components/Nav.js'
+import Meals from './components/Meals.js'
 
 
 class App extends Component {
@@ -23,7 +23,7 @@ class App extends Component {
                             <Route exact path="/auth/register" component={Registration}/>
                             <Route exact path="/auth/login" component={Login}/>
                             <Route exact path="/user" component={Settings}/>
-                            <Route exact path="/meals" component={Filter}/>
+                            <Route exact path="/meals" component={Meals}/>
                             <Route exact path="/meals/create" component={CreateMeal}/>
                         </div>
                     </div>
