@@ -25,10 +25,9 @@ class Login extends Component {
     }
 
     render () {
-        const isLoggedIn = this.props.isLoggedIn
+        if (this.props.isLoggedIn) return <Redirect to="/meals"/>
         return (
             <div className="panel panel-default">
-                {isLoggedIn && <Redirect to="/meals"/>}
                 <div className="panel-heading">
                     Login
                 </div>

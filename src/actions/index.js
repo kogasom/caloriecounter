@@ -91,3 +91,8 @@ export const deleteMealRequest = meal => (dispatch,getState) => {(
         dispatch(deleteMeal(response.data.meals))
     })
 )}
+
+export const setFilters = filters => ({
+    type: 'SET_FILTERS',
+    filters
+})

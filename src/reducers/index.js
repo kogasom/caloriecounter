@@ -28,10 +28,23 @@ const meals = (state = [], action) => {
     }
 }
 
+const filter = (state = {
+    date_from: '',
+    date_to: '',
+    time_from: '',
+    time_to: '',
+}, action) => {
+    switch(action.type) {
+        case 'SET_FILTERS': return {...action.filters}
+        default: return state
+    }
+}
+
 const reducer = combineReducers({
     token,
     user,
-    meals
+    meals,
+    filter
 })
 
 export default reducer
