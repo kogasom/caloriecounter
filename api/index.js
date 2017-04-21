@@ -2,6 +2,7 @@ import Koa from 'koa'
 import serve from 'koa-static'
 import Router from 'koa-router'
 import bodyParser from 'koa-bodyparser'
+import cors from 'kcors'
 import validate from './validator.js'
 import user from './database/users.js'
 import Meal from './database/meals.js'
@@ -13,6 +14,7 @@ const router = new Router();
 const app = new Koa();
 
 app.use(bodyParser());
+app.use(cors());
 
 router.get('/',serve('build'));
 
