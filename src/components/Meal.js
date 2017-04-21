@@ -4,9 +4,9 @@ class Meal extends Component {
     render () {
         const {date,time,text,calories} = this.props
         return (
-            <div>
+            <li className="list-group-item">
                 {date} {time}: {text}  - {calories} kCal
-            </div>
+            </li>
         );
     }
 }
