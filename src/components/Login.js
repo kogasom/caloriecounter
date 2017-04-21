@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { login } from '../actions'
+import { loginRequest } from '../actions'
 
 class Login extends Component {
     constructor(props) {
@@ -20,7 +20,7 @@ class Login extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { dispatch } = this.props
-        dispatch(login(this.state))
+        dispatch(loginRequest(this.state))
     }
 
     render () {

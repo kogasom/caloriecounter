@@ -10,6 +10,11 @@ export const setUser = user => ({
     user
 })
 
+export const login = user => dispatch => {
+    dispatch(setUser(user))
+    dispatch(setToken(user.api_token))
+}
+
 export const registerUser = user => dispatch => {(
     axios.post('http://localhost:3000/auth/register',user)
     .then(response => {
@@ -18,13 +23,16 @@ export const registerUser = user => dispatch => {(
     })
 )}
 
-export const login = user => dispatch => {(
+export const loginRequest = user => dispatch => {(
     axios.post('http://localhost:3000/auth/login',user)
     .then(response => {
-        dispatch(setUser(response.data))
-        dispatch(setToken(response.data.user.api_token))
+        //dispatch(setUser(response.data))
+        //dispatch(setToken(response.data.user.api_token))
+        dispatch(login(response.data.user))
     })
 )}
+
+
 
 export const logout = () => dispatch => {
     dispatch(setToken(''))

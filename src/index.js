@@ -5,6 +5,7 @@ import './index.css';
 
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
+
 import thunk from 'redux-thunk'
 import reducer from './reducers'
 
@@ -23,7 +24,7 @@ const store = createStore(reducer, composeEnhancers(
 
 ReactDOM.render(
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>,
   document.getElementById('root')
 );
