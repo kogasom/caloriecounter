@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import { Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Nav extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {isLoggedIn: false};
-    }
     render () {
-        const isLoggedIn = this.state.isLoggedIn
+        const isLoggedIn = this.props.isLoggedIn
         return (
             <nav className="navbar navbar-default">
                 <div className="container-fluid">
@@ -23,4 +20,10 @@ class Nav extends Component {
     }
 }
 
-export default Nav
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: (state.token !== '')
+    }
+}
+
+export default connect(mapStateToProps)(Nav)
