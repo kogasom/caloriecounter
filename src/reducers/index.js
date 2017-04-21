@@ -18,6 +18,7 @@ const user = (state = '', action) => {
 const meals = (state = [], action) => {
     switch(action.type) {
         case 'ADD_MEAL': return [...state,action.meal]
+        case 'SET_MEALS': return [...action.meals]
         default: return state
     }
 }

@@ -8,6 +8,7 @@ router.use('/meals',function (ctx, next) {
     try {
         ctx.assert(ctx.state.user, 401, 'Unauthenticated')
     } catch (err) {
+        ctx.status=401
         ctx.body = {error: 'Unauthenticated'}
         return
     }

@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import Filter from './Filter.js'
+import { getMeals } from '../actions'
+import { connect } from 'react-redux'
 
 class Meals extends Component {
+    componentDidMount() {
+        const { dispatch } = this.props
+        dispatch(getMeals())
+    }
     render() {
         return (
             <div>
@@ -13,4 +19,4 @@ class Meals extends Component {
     }
 }
 
-export default Meals
+export default connect()(Meals)

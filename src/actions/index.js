@@ -42,9 +42,21 @@ export const addMeal = meal => ({
     meal
 })
 
+export const setMeals = meals => ({
+    type: 'SET_MEALS',
+    meals
+})
+
 export const storeMeal = meal => (dispatch,getState) => {(
     axios.post('http://localhost:3000/meals',meal,{headers: {'Authorization': 'Bearer '+getState().token}})
     .then(response => {
         dispatch(addMeal(response.data.meals))
     })
 )}
+
+export const getMeals = () => (dispatch,getState) => {
+    axios.get('http://localhost:3000/meals',{headers: {'Authorization': 'Bearer '+getState().token}})
+    .then(response => {
+        dispatch(setMeals(response.data.meals))
+    })
+}
