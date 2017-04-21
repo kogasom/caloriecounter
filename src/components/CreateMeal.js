@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { storeMeal } from '../actions'
+import { storeMeal, updateMealRequest } from '../actions'
 
 class CreateMeal extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
+        this.state = (this.props.meal) ? this.props.meal : {
             date: '',
             time: '',
             text: '',
             calories: '',
         }
+        //console.log(this.props.match.params.id)
+        console.log(this.props)
     }
 
     handleChange(e) {
@@ -22,7 +24,11 @@ class CreateMeal extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { dispatch } = this.props
-        dispatch(storeMeal(this.state))
+        if (this.props.meal) {
+            dispatch(updateMealRequest(this.state))
+        } else {
+            dispatch(storeMeal(this.state))
+        }
     }
 
     render () {
@@ -60,4 +66,14 @@ class CreateMeal extends Component {
     }
 }
 
-export default connect()(CreateMeal)
+function getMeal(state,ownProps) {
+    return state.meals.filter(m => m.id == Number(ownProps.match.params.id))[0]
+}
+
+const mapStateToProps = (state,ownProps) => {
+    return {
+        meal:  getMeal(state,ownProps)
+    }
+}
+
+export default connect(mapStateToProps)(CreateMeal)

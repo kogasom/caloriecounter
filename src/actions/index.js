@@ -67,3 +67,15 @@ export const updateSettings = settings => (dispatch,getState) => {
         dispatch(setUser(response.data))
     })
 }
+
+export const updateMeal = meal => ({
+    type: 'UPDATE_MEAL',
+    meal
+})
+
+export const updateMealRequest = meal => (dispatch,getState) => {(
+    axios.put('http://localhost:3000/meals',meal,{headers: {'Authorization': 'Bearer '+getState().token}})
+    .then(response => {
+        dispatch(updateMeal(response.data.meals))
+    })
+)}

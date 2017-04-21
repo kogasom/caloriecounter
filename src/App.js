@@ -24,6 +24,7 @@ class App extends Component {
                             <Route exact path="/auth/login" component={Login}/>
                             <Route exact path="/user" component={Settings}/>
                             <Route exact path="/meals" component={Meals}/>
+                            <Route exact path="/meals/edit/:id" component={CreateMeal}/>
                             <Route exact path="/meals/create" component={CreateMeal}/>
                         </div>
                     </div>

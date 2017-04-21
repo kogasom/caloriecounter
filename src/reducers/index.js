@@ -19,6 +19,10 @@ const meals = (state = [], action) => {
     switch(action.type) {
         case 'ADD_MEAL': return [...state,action.meal]
         case 'SET_MEALS': return [...action.meals]
+        case 'UPDATE_MEAL': return state.map(m => {
+            if (m.id !== action.meal.id) {return m}
+            return {...action.meal}
+        })
         default: return state
     }
 }
