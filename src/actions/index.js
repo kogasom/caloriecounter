@@ -79,3 +79,15 @@ export const updateMealRequest = meal => (dispatch,getState) => {(
         dispatch(updateMeal(response.data.meals))
     })
 )}
+
+export const deleteMeal = meal => ({
+    type: 'DELETE_MEAL',
+    meal
+})
+
+export const deleteMealRequest = meal => (dispatch,getState) => {(
+    axios.delete('http://localhost:3000/meals/'+meal,{headers: {'Authorization': 'Bearer '+getState().token}})
+    .then(response => {
+        dispatch(deleteMeal(response.data.meals))
+    })
+)}

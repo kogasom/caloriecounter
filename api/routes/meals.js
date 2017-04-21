@@ -57,14 +57,7 @@ router.put('/meals',function (ctx, next) {
     }
 });
 router.delete('/meals/:id',function (ctx, next) {
-    var validator = validate(ctx.request.body,['id'])
-
-    if (validator.hasErrors) {
-        ctx.status = 422
-        ctx.body = {errors: validator.errors}
-        return
-    }
-
+    
     ctx.body = {
         meals: {id: ctx.params.id},
         deleted: ctx.state.meal.remove(ctx.params.id)

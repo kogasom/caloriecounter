@@ -23,6 +23,7 @@ const meals = (state = [], action) => {
             if (m.id !== action.meal.id) {return m}
             return {...action.meal}
         })
+        case 'DELETE_MEAL': return [...state.filter(m => m.id !== Number(action.meal.id))]
         default: return state
     }
 }

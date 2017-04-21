@@ -11,7 +11,7 @@ class Meals extends Component {
         if (this.props.isLoggedIn) dispatch(getMeals())
     }
     render() {
-        const MealList = this.props.meals.map(meal => <Meal key={meal.id} {...meal}/>)
+        const MealList = (this.props.meals) ? this.props.meals.map(meal => <Meal key={meal.id} {...meal}/>) : ''
         const isLoggedIn = this.props.isLoggedIn
         return (
             <div>
