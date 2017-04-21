@@ -14,13 +14,12 @@ npm run migrate:down
 ```
 
 
-### test server
+### running
 
 ```
 npm run dev
+open http://localhost:3000
 ```
-
-The site can be accessed on http://localhost:3000
 
 ### testing
 
