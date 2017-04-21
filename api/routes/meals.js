@@ -33,6 +33,7 @@ router.post('/meals',function (ctx, next) {
     var validator = validate(ctx.request.body,['date','time','text','calories'])
 
     if (validator.hasErrors) {
+        ctx.status = 422
         ctx.body = {errors: validator.errors}
         return
     }
@@ -45,6 +46,7 @@ router.put('/meals',function (ctx, next) {
     var validator = validate(ctx.request.body,['id','date','time','text','calories'])
 
     if (validator.hasErrors) {
+        ctx.status = 422
         ctx.body = {errors: validator.errors}
         return
     }
@@ -57,6 +59,7 @@ router.delete('/meals/:id',function (ctx, next) {
     var validator = validate(ctx.request.body,['id'])
 
     if (validator.hasErrors) {
+        ctx.status = 422
         ctx.body = {errors: validator.errors}
         return
     }

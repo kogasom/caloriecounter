@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const setToken = token => ({
     type: 'SET_TOKEN',
-    token
+    token: token
 })
 
 export const setUser = user => ({
@@ -13,7 +13,8 @@ export const setUser = user => ({
 export const registerUser = user => dispatch => {(
     axios.post('http://localhost:3000/auth/register',user)
     .then(response => {
-        dispatch(setUser(response.body))
-        dispatch(setToken(response.body.user.auth_token))
+        console.log(response.data)
+        dispatch(setUser(response.data))
+        dispatch(setToken(response.data.user.auth_token))
     })
 )}

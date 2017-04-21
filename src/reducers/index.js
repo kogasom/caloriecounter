@@ -1,7 +1,5 @@
 import { combineReducers } from 'redux'
 
-import {setToken, setUser, registerUser } from '../actions'
-
 const token = (state = '', action) => {
     switch(action.type) {
         case 'SET_TOKEN': return action.token

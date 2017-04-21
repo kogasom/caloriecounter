@@ -8,17 +8,27 @@ router.post('/auth/register', function (ctx, next) {
     var validator = validate(ctx.request.body,['name','username','password'])
 
     if (validator.hasErrors) {
+        ctx.status = 422
         ctx.body = {errors: validator.errors}
         return
     }
 
-    ctx.body = {user: user.create(ctx.request.body)}
+    var usr = user.create(ctx.request.body)
+
+    if (!usr) {
+        ctx.status = 422
+        ctx.body = {errors: {register: "username exists"}}
+        return
+    }
+
+    ctx.body = {user: usr}
 });
 
 router.post('/auth/login', function (ctx, next) {
     var validator = validate(ctx.request.body,['username','password'])
 
     if (validator.hasErrors) {
+        ctx.status = 422
         ctx.body = {errors: validator.errors}
         return
     }
