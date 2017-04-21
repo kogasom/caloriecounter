@@ -13,8 +13,7 @@ export const setUser = user => ({
 export const registerUser = user => dispatch => {(
     axios.post('http://localhost:3000/auth/register',user)
     .then(response => {
-        console.log(response.data)
         dispatch(setUser(response.data))
-        dispatch(setToken(response.data.user.auth_token))
+        dispatch(setToken(response.data.user.api_token))
     })
 )}
