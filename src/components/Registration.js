@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
-class Login extends Component {
+class Registration extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.state = {
+            name: '',
             username: '',
             password: ''
         }
@@ -18,10 +19,15 @@ class Login extends Component {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    Login
+                    Registration
                 </div>
                 <div className="panel-body">
                     <form>
+                        <div className="form-group">
+                            <label>Name</label>
+                            <input type="text" value={this.state.name} name="name" onChange={this.handleChange} className="form-control" />
+                        </div>
+
                         <div className="form-group">
                             <label>Username</label>
                             <input type="text" value={this.state.username} name="username" onChange={this.handleChange} className="form-control" />
@@ -29,9 +35,9 @@ class Login extends Component {
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="text" value={this.state.password} name="password" onChange={this.handleChange} className="form-control"/>
+                            <input type="password" value={this.state.password} name="password" onChange={this.handleChange} className="form-control"/>
                         </div>
-                        <button type="submit" className="btn btn-default">Login</button>
+                        <button type="submit" className="btn btn-default">Sign up</button>
                     </form>
                 </div>
             </div>
@@ -39,4 +45,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default Registration
