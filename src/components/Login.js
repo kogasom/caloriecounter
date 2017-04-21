@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { login } from '../actions'
 
 class Login extends Component {
     constructor(props) {
         super(props)
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             username: '',
             password: ''
@@ -14,6 +17,12 @@ class Login extends Component {
         this.setState({[e.target.name]: e.target.value})
     }
 
+    handleSubmit(e) {
+        e.preventDefault();
+        const { dispatch } = this.props
+        dispatch(login(this.state))
+    }
+
     render () {
         return (
             <div className="panel panel-default">
@@ -21,7 +30,7 @@ class Login extends Component {
                     Login
                 </div>
                 <div className="panel-body">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
                             <label>Username</label>
                             <input type="text" value={this.state.username} name="username" onChange={this.handleChange} className="form-control" />
@@ -29,7 +38,7 @@ class Login extends Component {
 
                         <div className="form-group">
                             <label>Password</label>
-                            <input type="text" value={this.state.password} name="password" onChange={this.handleChange} className="form-control"/>
+                            <input type="password" value={this.state.password} name="password" onChange={this.handleChange} className="form-control"/>
                         </div>
                         <button type="submit" className="btn btn-default">Login</button>
                     </form>
@@ -39,4 +48,4 @@ class Login extends Component {
     }
 }
 
-export default Login
+export default connect()(Login)
