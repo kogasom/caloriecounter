@@ -60,3 +60,10 @@ export const getMeals = () => (dispatch,getState) => {
         dispatch(setMeals(response.data.meals))
     })
 }
+
+export const updateSettings = settings => (dispatch,getState) => {
+    axios.post('http://localhost:3000/user',settings,{headers: {'Authorization': 'Bearer '+getState().token}})
+    .then(response => {
+        dispatch(setUser(response.data))
+    })
+}
