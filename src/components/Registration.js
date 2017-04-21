@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import {registerUser} from '../actions'
+import { Redirect } from 'react-router-dom'
 
 class Registration extends Component {
     constructor(props) {
@@ -25,8 +26,10 @@ class Registration extends Component {
     }
 
     render () {
+        const isLoggedIn = this.props.isLoggedIn
         return (
             <div className="panel panel-default">
+                {isLoggedIn && <Redirect to="/meals"/>}
                 <div className="panel-heading">
                     Registration
                 </div>
@@ -54,4 +57,10 @@ class Registration extends Component {
     }
 }
 
-export default connect()(Registration)
+const mapStateToProps = state => {
+    return {
+        isLoggedIn: (state.token !== '')
+    }
+}
+
+export default connect(mapStateToProps)(Registration)
