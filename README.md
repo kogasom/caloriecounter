@@ -18,7 +18,8 @@ npm run migrate:down
 
 ```
 npm run dev
-open http://localhost:3000
+npm start
+open http://localhost:3001
 ```
 
 ### testing

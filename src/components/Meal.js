@@ -18,8 +18,8 @@ class Meal extends Component {
         return (
             <li className="list-group-item">
                 {date} {time}: {text}  - {calories} kCal
-                <Link to={'/meals/edit/'+this.props.id}>Edit</Link>
-                <button onClick={this.deleteMeal} className="btn btn-xs btn-warning">Delete</button>
+                <Link to={'/meals/edit/'+this.props.id} className="btn btn-primary btn-xs pull-right">Edit</Link>
+                <button onClick={this.deleteMeal} className="btn btn-xs btn-warning pull-right">Delete</button>
             </li>
         );
     }
